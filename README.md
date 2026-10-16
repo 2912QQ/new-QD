@@ -6,6 +6,8 @@
 
 把 CFnew 控制台、优选操作和订阅生成放在 Vercel，Cloudflare Worker 只负责代理转发和 KV 配置。节点流量直接连接你自己的 Worker，不经过面板。
 
+图文教程：[CFnew 独立面板：Vercel 一键部署](https://joeyblog.net/cfnew-panel-vercel-deploy.html)。
+
 ## 一键部署
 
 1. 先部署 [CFnew 精简内核](https://github.com/byJoey/cfnew/tree/core-only)，设置 Worker 变量 `u` 为自己的 UUID。需要在线保存配置时，绑定 KV，名称填 `C` 或 `c`。已有用户保留原 UUID 和 KV 绑定，兼容日期用 `2026-01-20`。
