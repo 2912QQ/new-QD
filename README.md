@@ -2,7 +2,7 @@
 
 [![部署到 Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FbyJoey%2Fcfnew-panel&project-name=cfnew-panel&repository-name=cfnew-panel)
 [![Node.js 22](https://img.shields.io/badge/Node.js-22-43853d)](https://nodejs.org/)
-[![MIT](https://img.shields.io/badge/程序许可-MIT-blue)](./LICENSE)
+[![源码许可](https://img.shields.io/badge/源码许可-署名与禁止冒充原创-blue)](./LICENSE)
 
 把 CFnew 控制台、优选操作和订阅生成放在 Vercel，Cloudflare Worker 只负责代理转发和 KV 配置。节点流量直接连接你自己的 Worker，不经过面板。
 
@@ -12,7 +12,7 @@
 
 1. 先部署 [CFnew 精简内核](https://github.com/byJoey/cfnew/tree/core-only)，设置 Worker 变量 `u` 为自己的 UUID。需要在线保存配置时，绑定 KV，名称填 `C` 或 `c`。已有用户保留原 UUID 和 KV 绑定，兼容日期用 `2026-01-20`。
 2. 点击上面的 Deploy 按钮，登录 Vercel，按页面提示连接 GitHub 并创建自己的仓库副本。
-3. 项目设置保持默认：Framework 为 Other，根目录为仓库根目录，无需手填构建命令。点击 Deploy，等待完成。
+3. Application Preset（旧界面叫 Framework）选择 **Other**；如果自动识别成 Node，请改为 Other。根目录保持仓库根目录，无需手填构建命令。点击 Deploy，等待完成。
 4. 打开分配的面板域名，填写自己的 Worker 域名与 UUID 或自定义路径，即可连接。
 5. 在面板中配置并复制订阅到客户端。订阅使用面板域名；节点的 SNI / Host 与代理入口仍是 Worker。
 
@@ -112,7 +112,9 @@ npm run build:vercel -- /一个空目录
 
 ## 来源与交流
 
-来源与第三方许可见 [NOTICE.md](./NOTICE.md)。程序采用 MIT；内置规则数据遵循其原始许可。
+允许任何合法用途的修改、二次开发和 AI 辅助维护。**禁止将基于本项目源码的 AI 改写冒充为与本项目无关的完全原创代码**；改写相同逻辑、换语言、改名或重排结构后，仍须保留来源和版权说明。可以注明自己实际新增的独立贡献。
+
+本版本采用自定义的 [CFnew 源码使用与署名许可](./LICENSE)，不再标为标准 MIT。此前已按 MIT 发布的版本仍按其原许可使用。来源与第三方许可见 [NOTICE.md](./NOTICE.md)，内置规则数据继续遵循其原始许可。
 
 [博客](https://joeyblog.net) · [YouTube](https://youtube.com/@joeyblog) · [Telegram](https://t.me/+ft-zI76oovgwNmRh)
 

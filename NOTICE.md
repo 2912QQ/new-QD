@@ -1,6 +1,8 @@
 # 来源与许可
 
-面板程序沿用 CFnew 的实现，采用 MIT 许可。内置分流规则另遵循 GPL-3.0，来源、固定版本与完整许可见 src/singbox-rules.NOTICE.md 和 src/singbox-rules.LICENSE；MIT 不替代这些规则数据的许可。
+面板程序沿用 CFnew 的实现。本版本中由作者有权许可的代码采用仓库根目录的《CFnew 源码使用与署名许可》：允许合法使用、修改和二次开发，基于本仓库的 AI 改写也须保留来源，不得冒充原创。
+
+这是一份自定义许可，不是标准 MIT 许可。此前已按 MIT 发布的版本仍保留对应授权。内置分流规则另遵循 GPL-3.0，来源、固定版本与完整许可见 src/singbox-rules.NOTICE.md 和 src/singbox-rules.LICENSE；项目自身许可不替代第三方许可。
 
 感谢以下项目和作者：
 
