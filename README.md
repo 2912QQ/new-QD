@@ -18,6 +18,10 @@
 
 部署按钮会引导平台登录、Git 授权和创建项目，这些步骤仍需用户在自己的账号完成。项目无需付费数据库或面板 KV。
 
+如果仓库列表为空，先到 Vercel 账号的 Authentication → Sign-in Methods 连接 GitHub，再返回部署页面。
+
+GitHub 中已经有自己的 `cfnew-panel` 仓库时，在 Vercel 的 New Project → Import Git Repository 选择该仓库即可。通过 Git 连接部署后，推送到 `main` 会自动更新正式站；其它分支用于预览。已有源码无需删掉重建。
+
 ## 可选变量：w
 
 `w` 设置在 **Vercel 面板项目**的 Settings → Environment Variables，变量名为小写。选择 Production；需要预览也生效时同时选择 Preview。保存后重新部署。
