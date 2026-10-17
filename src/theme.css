@@ -963,3 +963,11 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
   #coreVersionStatus { margin: 16px 14px 12px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* CPU 保护沿用配置页的控件和留白，说明与开关关联。 */
+.cp-cpu-setting { margin-bottom: 20px; }
+.cp-cpu-switch { display: flex; align-items: center; gap: 10px; min-height: 44px; color: var(--cp-cyan); cursor: pointer; font-weight: bold; }
+.cp-cpu-switch input { width: 20px; height: 20px; accent-color: var(--cp-cyan); flex-shrink: 0; }
+.cp-cpu-switch input:focus-visible { outline: 2px solid var(--cp-yellow); outline-offset: 4px; }
+.cp-cpu-switch:has(input:disabled) { cursor: default; color: var(--cp-text-dim); }
+#freeCpuHint { display: block; max-width: 72ch; color: var(--cp-text-dim); line-height: 1.6; font-size: .85rem; }

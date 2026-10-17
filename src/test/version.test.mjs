@@ -5,7 +5,7 @@ import test from 'node:test';
 
 process.env.CFNEW_ALLOW_PRIVATE = 'yes';
 const { handlePanel } = await import('../server.mjs');
-const version = '2026.10.17.1';
+const version = '2026.10.17.2';
 const uuid = '351c9981-04b6-4103-aa4b-864aa9c91469';
 const source = await readFile(process.env.CFNEW_TEST_CORE || new URL('../../明文源吗', import.meta.url), 'utf8');
 const worker = (await import('data:text/javascript;base64,' + Buffer.from(source.replace(/import\s*\{\s*connect as ([^}]+)\}\s*from\s*['"]cloudflare:sockets['"];/, (_, name) => 'const ' + name.trim() + ' = () => { throw new Error("此测试不建立代理连接"); };')).toString('base64'))).default;
@@ -42,8 +42,8 @@ test('面板对照当前、旧版、无版本内核，并提供真实更新说�
       assert.equal(context.release.coreVersion, coreVersion || '');
       assert.equal(context.release.needsUpdate, coreVersion !== version);
       assert.equal(context.release.changes.length, 2);
-      assert.ok(context.release.changes.some(text => text.includes('IPv6')));
-      assert.ok(context.release.changes.some(text => text.includes('pp.xy.kg')));
+      assert.ok(context.release.changes.some(text => text.includes('CPU')));
+      assert.ok(context.release.changes.some(text => text.includes('配套内核')));
       assert.equal(context.release.zipUrl, 'https://raw.githubusercontent.com/byJoey/cfnew/core-only/pages.zip');
     } finally { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
   }

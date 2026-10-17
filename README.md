@@ -65,6 +65,14 @@ Clash： /sub?host=your-worker.example.com&uuid=你的UUID&target=clash
 
 未绑定 Worker KV 仍可读取环境配置并生成订阅，但页面不能保存。原来直接指向 Worker 的 `/sub` 需替换成独立面板生成的新订阅。
 
+## Free CPU 保护
+
+更新配套内核到 `2026.10.17.2`，在“配置管理”开启 **Free CPU 保护**，保存后对新连接生效。默认关闭，旧内核会提示更新。
+
+开启后保留 WS 和 XHTTP：每条连接上下载合计最多 **384 KiB 或 96 个数据块**，超过就主动断开。新连接重新计算预算；关闭后恢复原来的传输方式。没有 KV 时可设置 Worker 变量 `freeCpu=yes` 或 `FREE_CPU=yes`，KV 中的设置优先。
+
+这是按流量和处理次数估算的保护，Worker 无法读取实时 CPU 余量，不能保证所有免费账号零超限。客户端需自行重连，正在进行的下载、视频和长连接可能中断，不会自动续传。
+
 ## 自有服务器与 Docker
 
 Node.js 22：

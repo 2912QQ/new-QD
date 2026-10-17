@@ -1,4 +1,4 @@
-export const PANEL_VERSION = '2026.10.17.1';
+export const PANEL_VERSION = '2026.10.17.2';
 
 export function coreRelease(config) {
   const coreVersion = typeof config.coreVersion === 'string' ? config.coreVersion : '';
@@ -7,8 +7,8 @@ export function coreRelease(config) {
     coreVersion,
     needsUpdate: coreVersion !== PANEL_VERSION,
     changes: [
-      'IPv6 优选保留 # 后面的自定义名称，重名自动编号。',
-      '官方直连回退改用 pp.xy.kg；更新配套内核后生效，手填 p 不受影响。',
+      '新增 Free CPU 保护开关，按单连接双向流量和数据块预算提前断开。',
+      '默认关闭；开启后可能中断下载和视频，需客户端重连。更新配套内核后生效。',
     ],
     zipUrl: 'https://raw.githubusercontent.com/byJoey/cfnew/core-only/pages.zip',
     workerUrl: 'https://raw.githubusercontent.com/byJoey/cfnew/core-only/_worker.js',

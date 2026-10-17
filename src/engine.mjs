@@ -72,7 +72,9 @@ let 启用家宽链式 = false;
 
 let 键值配置 = {};
 
+const supportsFreeCpu = Object.hasOwn(config, 'freeCpu');
 const 配置默认值 = {
+  freeCpu: 'no',
   wk: '',
   ev: 'yes',
   et: 'no',
@@ -124,7 +126,7 @@ function 整理有效配置(配置) {
     ...配置默认值,
     ...配置
   };
-  ['ev', 'et', 'ex', 'ech', 'ena', 'epd', 'epi', 'egi', 'ipv4', 'ipv6', 'ispMobile', 'ispUnicom', 'ispTelecom', 'jk'].forEach(键 => {
+  ['freeCpu', 'ev', 'et', 'ex', 'ech', 'ena', 'epd', 'epi', 'egi', 'ipv4', 'ipv6', 'ispMobile', 'ispUnicom', 'ispTelecom', 'jk'].forEach(键 => {
     快照[键] = 归一配置开关(快照[键], 是否开启值(配置默认值[键]));
   });
   if (快照.ev === 'no' && 快照.et === 'no' && 快照.ex === 'no') {
@@ -148,6 +150,7 @@ function 读取环境配置值(环境值, ...名称列表) {
 
 function 获取环境配置快照(环境值 = {}) {
   const 映射 = {
+    freeCpu: ['freeCpu', 'FREE_CPU'],
     wk: ['wk', 'WK'],
     ev: ['ev', 'EV'],
     et: ['et', 'ET'],
@@ -2035,6 +2038,13 @@ async function 处理订阅值(请求241, 用户240 = null) {
                         </div>
                     </form>
                     <form id="otherConfigForm" style="margin-bottom: 20px;">
+                        <div class="cp-cpu-setting">
+                            <label class="cp-cpu-switch" for="freeCpu">
+                                <input type="checkbox" id="freeCpu" aria-describedby="freeCpuHint" ${supportsFreeCpu ? '' : 'disabled'}>
+                                <span>Free CPU 保护</span>
+                            </label>
+                            <small id="freeCpuHint">${supportsFreeCpu ? '单连接上下载合计最多 384 KiB 或 96 个数据块，超过就断开。客户端需自行重连，下载和视频可能中断。保存后对新连接生效，不能保证零超限。' : '当前内核不支持，请先更新配套内核。'}</small>
+                        </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #00f0ff; font-weight: bold; text-shadow: 0 0 3px #00f0ff;">${翻译值.protocolSelection}</label>
                             <div style="padding: 15px; background: rgba(15, 3, 40, 0.6); border: 1px solid #00f0ff; border-radius: 5px;">
@@ -3126,6 +3136,7 @@ function 同步联动界面状态() {
 
 function 应用配置到界面(配置) {
   写入字段值('wkRegion', 配置.wk);
+  写入开关值('freeCpu', 配置.freeCpu, false);
   写入开关值('ev', 配置.ev, true);
   写入开关值('et', 配置.et, false);
   写入开关值('ex', 配置.ex, false);
@@ -3164,6 +3175,7 @@ function 应用配置到界面(配置) {
 function 收集界面配置() {
   const 配置 = {
     wk: 读取字段值('wkRegion'),
+    freeCpu: 读取开关值('freeCpu', false),
     ev: 读取开关值('ev', true),
     et: 读取开关值('et', false),
     ex: 读取开关值('ex', false),
@@ -3195,6 +3207,7 @@ function 收集界面配置() {
     ispUnicom: 读取开关值('ispUnicom', true),
     ispTelecom: 读取开关值('ispTelecom', true)
   };
+  if (document.getElementById('freeCpu')?.disabled) delete 配置.freeCpu;
   if (配置.ev === 'no' && 配置.et === 'no' && 配置.ex === 'no') {
     配置.ev = 'yes';
     写入开关值('ev', 'yes', true);
@@ -3335,6 +3348,7 @@ async function 重置全部配置() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          ...(document.getElementById('freeCpu')?.disabled ? {} : { freeCpu: '' }),
           wk: '',
           d: '',
           p: '',
